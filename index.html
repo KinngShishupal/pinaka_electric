@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinaka Electric - Future of Urban Mobility</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="shortcut icon" href="images/logo.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Pinaka Electric" class="logo-image">
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#models" class="nav-link">Models</a></li>
+                <li><a href="#specs" class="nav-link">Specs</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#location" class="nav-link">Location</a></li>
+            </ul>
+            <button class="cta-button">Pre-Order Now</button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="animated-bg"></div>
+            <div class="particles" id="particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">The Future</span>
+                    <span class="title-line">of Urban</span>
+                    <span class="title-line gradient-text">Mobility</span>
+                </h1>
+                <p class="hero-subtitle">Experience the thrill of electric revolution with our cutting-edge scooters</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">
+                        <span>Explore Models</span>
+                        <div class="btn-shine"></div>
+                    </button>
+                    <button class="btn-secondary">
+                        <span>Watch Video</span>
+                        <div class="play-icon">▶</div>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="75">0</span>
+                        <span class="stat-label">km Range</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="45">0</span>
+                        <span class="stat-label">km/h Speed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-target="3">0</span>
+                        <span class="stat-label">Hours Charge</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="scooter-showcase">
+                    <div class="scooter-glow"></div>
+                    <div class="scooter-placeholder">
+                        <svg viewBox="0 0 800 600" class="scooter-svg">
+                            <!-- Scooter Illustration -->
+                            <defs>
+                                <linearGradient id="scooterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Wheels -->
+                            <circle cx="200" cy="450" r="60" fill="url(#scooterGrad)" class="wheel-front"/>
+                            <circle cx="200" cy="450" r="40" fill="#0a0e27" class="wheel-inner"/>
+                            <circle cx="600" cy="450" r="60" fill="url(#scooterGrad)" class="wheel-back"/>
+                            <circle cx="600" cy="450" r="40" fill="#0a0e27" class="wheel-inner"/>
+                            <!-- Deck -->
+                            <rect x="220" y="430" width="360" height="20" rx="10" fill="url(#scooterGrad)" class="deck"/>
+                            <!-- Stem -->
+                            <rect x="560" y="200" width="20" height="230" rx="10" fill="url(#scooterGrad)" class="stem"/>
+                            <!-- Handlebar -->
+                            <rect x="480" y="190" width="180" height="15" rx="7" fill="url(#scooterGrad)" class="handlebar"/>
+                            <!-- LED Light -->
+                            <circle cx="200" cy="410" r="8" fill="#00f2fe" class="led-light">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </div>
+                    <div class="floating-specs">
+                        <div class="spec-badge" style="top: 20%; left: 10%;">
+                            <span class="badge-icon">⚡</span>
+                            <span class="badge-text">Fast Charge</span>
+                        </div>
+                        <div class="spec-badge" style="top: 50%; right: 10%;">
+                            <span class="badge-icon">🔋</span>
+                            <span class="badge-text">Long Range</span>
+                        </div>
+                        <div class="spec-badge" style="bottom: 20%; left: 15%;">
+                            <span class="badge-icon">💨</span>
+                            <span class="badge-text">High Speed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-accent">Why Choose</span> ElectroRide
+                </h2>
+                <p class="section-subtitle">Experience the perfect blend of technology, design, and sustainability</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <div class="icon-bg"></div>
+                        <span class="icon">⚡</span>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Reach speeds up to 45 km/h with our powerful electric motor and instant torque delivery</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <div class="icon-bg"></div>
+                        <span class="icon">🔋</span>
+                    </div>
+                    <h3>Extended Range</h3>
+                    <p>Travel up to 75km on a single charge with our advanced lithium-ion battery technology</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <div class="icon-bg"></div>
+                        <span class="icon">🎯</span>
+                    </div>
+                    <h3>Smart Control</h3>
+                    <p>Intuitive app integration for real-time tracking, diagnostics, and ride statistics</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <div class="icon-bg"></div>
+                        <span class="icon">🌿</span>
+                    </div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Zero emissions, sustainable materials, and energy-efficient design for a greener future</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <div class="icon-bg"></div>
+                        <span class="icon">🛡️</span>
+                    </div>
+                    <h3>Safe & Secure</h3>
+                    <p>Advanced braking system, LED lights, and anti-theft protection for your peace of mind</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <div class="icon-bg"></div>
+                        <span class="icon">💎</span>
+                    </div>
+                    <h3>Premium Design</h3>
+                    <p>Aerospace-grade aluminum frame with sleek aesthetics and ergonomic comfort</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models" id="models">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-accent">Our</span> Models
+                </h2>
+                <p class="section-subtitle">Find your perfect ride from our premium collection</p>
+            </div>
+            <div class="models-showcase">
+                <div class="model-card">
+                    <div class="model-badge">TurBoX</div>
+                    <div class="model-image-real">
+                        <img src="images/scooter-blue.png" alt="TurBoX Electric Scooter" class="scooter-img">
+                    </div>
+                    <h3 class="model-name">TurBoX</h3>
+                    <p class="model-desc">High-performance electric scooter with advanced features</p>
+                    
+                    <div class="detailed-specs">
+                        <div class="spec-row">
+                            <div class="spec-column">
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">⚡</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Motor</span>
+                                        <span class="spec-value-small">1000W</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🔋</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Battery</span>
+                                        <span class="spec-value-small">48/60V, 32Ah</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">⚙️</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Controller</span>
+                                        <span class="spec-value-small">48/60V</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🎯</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Tyre Size</span>
+                                        <span class="spec-value-small">10/10 Inches</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spec-column">
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🚀</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Max Speed</span>
+                                        <span class="spec-value-small">25 km/h</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">📏</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Net Weight</span>
+                                        <span class="spec-value-small">80 Kg</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">💪</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Load Capacity</span>
+                                        <span class="spec-value-small">120 Kg</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🛞</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Brake</span>
+                                        <span class="spec-value-small">F Disc / R Drum</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="range-highlight">
+                            <span class="range-icon">🔋</span>
+                            <span class="range-text">Range: 50-80 Km per charge</span>
+                        </div>
+                    </div>
+                    
+                    <div class="model-price">Contact for Price</div>
+                    <button class="model-btn">
+                        <span>Enquire Now</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+
+                <div class="model-card featured">
+                    <div class="model-badge premium">P-BMW</div>
+                    <div class="model-image-real">
+                        <img src="images/p_bmw.jpeg" alt="P-BMW Electric Scooter" class="scooter-img">
+                    </div>
+                    <h3 class="model-name">P-BMW</h3>
+                    <p class="model-desc">Premium electric scooter with sophisticated design and powerful performance</p>
+                    
+                    <div class="detailed-specs">
+                        <div class="spec-row">
+                            <div class="spec-column">
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">⚡</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Motor</span>
+                                        <span class="spec-value-small">1000W</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🔋</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Battery</span>
+                                        <span class="spec-value-small">48/60V, 32Ah</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">⚙️</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Controller</span>
+                                        <span class="spec-value-small">48/60V</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🎯</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Tyre Size</span>
+                                        <span class="spec-value-small">10/10 Inches</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spec-column">
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🚀</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Max Speed</span>
+                                        <span class="spec-value-small">25 km/h</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">📏</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Net Weight</span>
+                                        <span class="spec-value-small">80 Kg</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">💪</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Load Capacity</span>
+                                        <span class="spec-value-small">120 Kg</span>
+                                    </div>
+                                </div>
+                                <div class="spec-detail-item">
+                                    <span class="spec-icon-small">🛞</span>
+                                    <div class="spec-text">
+                                        <span class="spec-label-small">Brake</span>
+                                        <span class="spec-value-small">F Disc / R Drum</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="range-highlight">
+                            <span class="range-icon">🔋</span>
+                            <span class="range-text">Range: 50-80 Km per charge</span>
+                        </div>
+                    </div>
+                    
+                    <div class="model-price">Contact for Price</div>
+                    <button class="model-btn">
+                        <span>Enquire Now</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section class="specs" id="specs">
+        <div class="container">
+            <div class="specs-content">
+                <div class="specs-visual">
+                    <div class="specs-circle">
+                        <div class="circle-inner">
+                            <span class="circle-icon">⚙️</span>
+                        </div>
+                    </div>
+                    <div class="specs-lines"></div>
+                </div>
+                <div class="specs-details">
+                    <h2 class="section-title">
+                        <span class="title-accent">Technical</span> Excellence
+                    </h2>
+                    <p class="section-subtitle">Engineered with precision, built for performance</p>
+                    <div class="specs-list">
+                        <div class="spec-detail">
+                            <div class="spec-icon-wrapper">
+                                <span class="spec-icon">⚡</span>
+                            </div>
+                            <div class="spec-info">
+                                <h4>Powerful Motor</h4>
+                                <p>500W brushless motor with 800W peak power for exceptional performance</p>
+                            </div>
+                        </div>
+                        <div class="spec-detail">
+                            <div class="spec-icon-wrapper">
+                                <span class="spec-icon">🔋</span>
+                            </div>
+                            <div class="spec-info">
+                                <h4>High-Capacity Battery</h4>
+                                <p>48V 15Ah lithium-ion battery with intelligent BMS protection</p>
+                            </div>
+                        </div>
+                        <div class="spec-detail">
+                            <div class="spec-icon-wrapper">
+                                <span class="spec-icon">🎯</span>
+                            </div>
+                            <div class="spec-info">
+                                <h4>Smart Display</h4>
+                                <p>LED dashboard with speed, battery, and ride mode indicators</p>
+                            </div>
+                        </div>
+                        <div class="spec-detail">
+                            <div class="spec-icon-wrapper">
+                                <span class="spec-icon">🌊</span>
+                            </div>
+                            <div class="spec-info">
+                                <h4>Weather Resistant</h4>
+                                <p>IP65 water resistance rating for all-weather riding confidence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-accent">What Our</span> Riders Say
+                </h2>
+                <p class="section-subtitle">Join thousands of satisfied riders worldwide</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">"This scooter has completely transformed my daily commute. It's fast, smooth, and incredibly fun to ride. Best purchase I've made this year!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Doe</h4>
+                            <p>Urban Commuter</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">"Amazing build quality and the battery life is outstanding. I can go a week without charging. The app integration is also super helpful!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Miller</h4>
+                            <p>Tech Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">"Eco-friendly, stylish, and powerful. ElectroRide scooters are the perfect combination of everything I was looking for. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RJ</div>
+                        <div class="author-info">
+                            <h4>Robert Johnson</h4>
+                            <p>Environmental Advocate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="section-title">
+                        <span class="title-accent">Ready to</span> Ride?
+                    </h2>
+                    <p class="contact-desc">Join the electric revolution today and experience the future of urban mobility</p>
+                    <div class="contact-features">
+                        <div class="contact-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Free Shipping Worldwide</span>
+                        </div>
+                        <div class="contact-feature">
+                            <span class="check-icon">✓</span>
+                            <span>2-Year Warranty</span>
+                        </div>
+                        <div class="contact-feature">
+                            <span class="check-icon">✓</span>
+                            <span>30-Day Money Back</span>
+                        </div>
+                        <div class="contact-feature">
+                            <span class="check-icon">✓</span>
+                            <span>24/7 Customer Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Model</option>
+                                <option value="lite">Lite Glide - $399</option>
+                                <option value="urban">Urban Cruiser - $599</option>
+                                <option value="pro">Pro Rider - $899</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Message (Optional)" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Pre-Order Now</span>
+                            <div class="btn-shine"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Location Section -->
+    <section class="location" id="location">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-accent">Visit Our</span> Showroom
+                </h2>
+                <p class="section-subtitle">Experience our electric scooters in person</p>
+            </div>
+            <div class="location-content">
+                <div class="location-info">
+                    <div class="address-card">
+                        <div class="address-icon">
+                            <span>📍</span>
+                        </div>
+                        <div class="address-details">
+                            <h3>Office Address</h3>
+                            <p class="address-line">Garhi Choukhandi</p>
+                            <p class="address-line">Near Qipl Building, Sector 68</p>
+                            <p class="address-line">Noida, Gautam Buddha Nagar</p>
+                            <p class="address-line">Uttar Pradesh - 201301</p>
+                        </div>
+                    </div>
+                    <div class="contact-details-grid">
+                        <div class="contact-detail-item">
+                            <div class="detail-icon">📞</div>
+                            <div class="detail-info">
+                                <h4>Phone</h4>
+                                <p><a href="tel:+917042182908" class="contact-link">+91 7042182908</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="detail-icon">✉️</div>
+                            <div class="detail-info">
+                                <h4>Email</h4>
+                                <p><a href="mailto:pinakaelectric2908@gmail.com" class="contact-link">pinakaelectric2908@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="detail-icon">🕐</div>
+                            <div class="detail-info">
+                                <h4>Working Hours</h4>
+                                <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.640871889845!2d77.37719067550098!3d28.57738378656421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5f99cf56a7f%3A0x3ab5c265c5b7c5e!2sSector%2068%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1706790000000!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 20px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="google-map">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="Pinaka Electric" class="footer-logo-image">
+                    </div>
+                    <p class="footer-desc">Revolutionizing urban mobility with cutting-edge electric scooters</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">t</a>
+                        <a href="#" class="social-link">i</a>
+                        <a href="#" class="social-link">y</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#models">Models</a></li>
+                        <li><a href="#specs">Specifications</a></li>
+                        <li><a href="#location">Location</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for updates and exclusive offers</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button>→</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ElectroRide. All rights reserved. Made with ⚡ for the future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
