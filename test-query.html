@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Supabase Query</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <style>
+        body { 
+            font-family: monospace; 
+            padding: 40px; 
+            background: #1a1a1a; 
+            color: #0f0;
+        }
+        .result { 
+            background: #000; 
+            padding: 20px; 
+            border-radius: 10px; 
+            border: 2px solid #0f0;
+            margin: 20px 0;
+        }
+        h1 { color: #0ff; }
+        .success { color: #0f0; }
+        .error { color: #f00; }
+        .warning { color: #ff0; }
+        pre { 
+            background: #222; 
+            padding: 15px; 
+            overflow-x: auto;
+            border-left: 3px solid #0f0;
+        }
+        button {
+            background: #0f0;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background: #0ff; }
+        .info { color: #0ff; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Supabase Query Test</h1>
+    
+    <div class="info">
+        <p><strong>Testing the same query as your React app</strong></p>
+        <p>This will show you EXACTLY what's happening</p>
+    </div>
+
+    <button onclick="testQuery()">🚀 Run Query</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const SUPABASE_URL = 'https://zqjeoqvstvbzvikwsftv.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_xYyEJXCOfjeHHkFwY5Z5Yw_nbZmhl7V';
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = message;
+            document.getElementById('results').appendChild(div);
+        }
+
+        async function testQuery() {
+            document.getElementById('results').innerHTML = '';
+            
+            log('<h2>📡 Starting Test...</h2>');
+            
+            // Check if Supabase library loaded
+            if (typeof window.supabase === 'undefined') {
+                log('<h3 class="error">❌ Supabase library not loaded!</h3>', 'error');
+                return;
+            }
+            log('<h3 class="success">✅ Supabase library loaded</h3>');
+            
+            // Create client
+            let client;
+            try {
+                client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                log('<h3 class="success">✅ Client created</h3>');
+            } catch (error) {
+                log(`<h3 class="error">❌ Failed to create client: ${error.message}</h3>`, 'error');
+                return;
+            }
+            
+            // Test query
+            log('<h3>🔄 Running query: .from("reviews").select("*").order("created_at", { ascending: false })</h3>');
+            
+            try {
+                const response = await client
+                    .from('reviews')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                log(`<h3>📦 Response received:</h3>
+                    <pre>${JSON.stringify(response, null, 2)}</pre>`);
+                
+                const { data, error, status, statusText } = response;
+                
+                // Analyze response
+                log(`<h3>📊 Analysis:</h3>
+                    <ul>
+                        <li><strong>Status:</strong> ${status} ${statusText}</li>
+                        <li><strong>Has Error:</strong> ${error ? 'YES' : 'NO'}</li>
+                        <li><strong>Data Type:</strong> ${Array.isArray(data) ? 'Array' : typeof data}</li>
+                        <li><strong>Data Length:</strong> ${data ? data.length : 'null'}</li>
+                    </ul>`);
+                
+                if (error) {
+                    log(`<h3 class="error">❌ Error Details:</h3>
+                        <pre>${JSON.stringify(error, null, 2)}</pre>`, 'error');
+                    
+                    // Common error hints
+                    if (error.code === '42P01') {
+                        log('<p class="warning">💡 Table "reviews" does not exist. Create it first!</p>', 'warning');
+                    } else if (error.code === 'PGRST116') {
+                        log('<p class="warning">💡 Invalid API key or authentication failed</p>', 'warning');
+                    } else if (error.message.includes('RLS')) {
+                        log('<p class="warning">💡 Row Level Security is blocking the query</p>', 'warning');
+                    }
+                } else if (data && data.length === 0) {
+                    log(`<h3 class="warning">⚠️  SUCCESS but table is EMPTY!</h3>
+                        <p>The query worked (200 OK) but no reviews exist in the database.</p>
+                        <p><strong>Solution:</strong> Add data to your reviews table</p>`, 'warning');
+                    
+                    log(`<h3>💡 Quick Fix - Run this SQL:</h3>
+                        <pre>INSERT INTO reviews (name, title, review_text, rating) VALUES
+('Test User', 'Tester', 'This is a test review!', 5);</pre>`, 'info');
+                } else if (data && data.length > 0) {
+                    log(`<h3 class="success">✅ SUCCESS! Found ${data.length} reviews:</h3>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>`, 'success');
+                }
+                
+            } catch (error) {
+                log(`<h3 class="error">❌ Unexpected error:</h3>
+                    <pre>${error.message}\n${error.stack}</pre>`, 'error');
+            }
+            
+            // Compare with curl
+            log(`<h3>🔧 Test with curl:</h3>
+                <pre>curl '${SUPABASE_URL}/rest/v1/reviews?select=*&order=created_at.desc' \\
+  -H 'apikey: ${SUPABASE_ANON_KEY}' \\
+  -H 'authorization: Bearer ${SUPABASE_ANON_KEY}'</pre>`);
+        }
+
+        // Auto-run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            log('<p class="info">Click the button to test your Supabase query</p>');
+        });
+    </script>
+</body>
+</html>
