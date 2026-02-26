@@ -161,7 +161,149 @@ async function loadOfficeInfo() {
     }
 }
 
+// Function to create a vehicle/model card
+function createVehicleCard(vehicle) {
+    const card = document.createElement('div');
+    card.className = vehicle.is_featured ? 'model-card featured' : 'model-card';
+    
+    card.innerHTML = `
+        <div class="model-badge ${vehicle.is_featured ? 'premium' : ''}">${vehicle.name}</div>
+        <div class="model-image-real">
+            <img src="${vehicle.image_url || 'images/scooter-default.png'}" alt="${vehicle.name} Electric Scooter" class="scooter-img">
+        </div>
+        <h3 class="model-name">${vehicle.name}</h3>
+        <p class="model-desc">${vehicle.description || ''}</p>
+        
+        <div class="detailed-specs">
+            <div class="spec-row">
+                <div class="spec-column">
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">⚡</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Motor</span>
+                            <span class="spec-value-small">${vehicle.motor || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">🔋</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Battery</span>
+                            <span class="spec-value-small">${vehicle.battery || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">⚙️</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Controller</span>
+                            <span class="spec-value-small">${vehicle.controller || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">🎯</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Tyre Size</span>
+                            <span class="spec-value-small">${vehicle.tyre_size || 'N/A'}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="spec-column">
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">🚀</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Max Speed</span>
+                            <span class="spec-value-small">${vehicle.max_speed || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">📏</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Net Weight</span>
+                            <span class="spec-value-small">${vehicle.net_weight || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">💪</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Load Capacity</span>
+                            <span class="spec-value-small">${vehicle.load_capacity || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <div class="spec-detail-item">
+                        <span class="spec-icon-small">🛞</span>
+                        <div class="spec-text">
+                            <span class="spec-label-small">Brake</span>
+                            <span class="spec-value-small">${vehicle.brake || 'N/A'}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="range-highlight">
+                <span class="range-icon">🔋</span>
+                <span class="range-text">Range: ${vehicle.range || 'Contact for details'}</span>
+            </div>
+        </div>
+        
+        <div class="model-price">${vehicle.price || 'Contact for Price'}</div>
+        <button class="model-btn">
+            <span>Enquire Now</span>
+            <span class="arrow">→</span>
+        </button>
+    `;
+    
+    return card;
+}
+
+// Function to load and display vehicles
+async function loadVehicles() {
+    if (!supabaseClient) {
+        console.error('Supabase client not initialized for vehicles');
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('vehicles')
+            .select('*')
+            .order('created_at', { ascending: false });
+        
+        console.log('Vehicles loaded from Supabase:', data);
+        
+        if (error) {
+            console.error('Error fetching vehicles:', error);
+            return;
+        }
+        
+        const modelsShowcase = document.getElementById('modelsShowcase');
+        if (!modelsShowcase) {
+            console.error('Models showcase element not found');
+            return;
+        }
+        
+        if (!data || data.length === 0) {
+            console.warn('No vehicles found in database. Keeping default models.');
+            return;
+        }
+        
+        // Clear existing models
+        modelsShowcase.innerHTML = '';
+        
+        // Render each vehicle
+        console.log(`Rendering ${data.length} vehicles`);
+        data.forEach((vehicle, index) => {
+            console.log(`  🚗 Rendering vehicle ${index + 1}:`, vehicle.name);
+            const card = createVehicleCard(vehicle);
+            modelsShowcase.appendChild(card);
+        });
+        
+        console.log('✅ All vehicles rendered successfully!');
+        
+    } catch (err) {
+        console.error('Unexpected error loading vehicles:', err);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
     loadOfficeInfo();
+    loadVehicles();
 });
