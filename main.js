@@ -96,6 +96,72 @@ function displayFallbackReviews() {
     }
 }
 
+// Function to load and display office information
+async function loadOfficeInfo() {
+    if (!supabaseClient) {
+        console.error('Supabase client not initialized for office info');
+        return;
+    }
+    
+    try {
+        // First query without .single() to check if data exists
+        const { data, error } = await supabaseClient
+            .from('visit')
+            .select('*')
+            .limit(1);
+        
+        console.log('Office info query result:', data);
+        
+        if (error) {
+            console.error('Error fetching office info:', error);
+            return;
+        }
+        
+        if (!data || data.length === 0) {
+            console.warn('⚠️ visit table is EMPTY! Add data in Supabase.');
+            console.warn('💡 Go to: https://supabase.com/dashboard/project/zqjeoqvstvbzvikwsftv/editor');
+            return;
+        }
+        
+        // Use first row
+        const officeData = data[0];
+        console.log('Office info loaded:', officeData);
+        
+        // Update address
+        const addressElement = document.getElementById('officeAddress');
+        if (addressElement && officeData.address) {
+            const addressLines = officeData.address.split('\n').map(line => 
+                `<p class="address-line">${line}</p>`
+            ).join('');
+            addressElement.innerHTML = `<h3>Office Address</h3>${addressLines}`;
+        }
+        
+        // Update phone
+        const phoneElement = document.getElementById('officePhone');
+        if (phoneElement && officeData.phone) {
+            phoneElement.innerHTML = `<a href="tel:${officeData.phone}" class="contact-link">${officeData.phone}</a>`;
+        }
+        
+        // Update email
+        const emailElement = document.getElementById('officeEmail');
+        if (emailElement && officeData.email) {
+            emailElement.innerHTML = `<a href="mailto:${officeData.email}" class="contact-link">${officeData.email}</a>`;
+        }
+        
+        // Update working hours
+        const hoursElement = document.getElementById('workingHours');
+        if (hoursElement && officeData.working_hours) {
+            hoursElement.textContent = officeData.working_hours;
+        }
+        
+        console.log('Office information updated successfully');
+        
+    } catch (err) {
+        console.error('Unexpected error loading office info:', err);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
+    loadOfficeInfo();
 });
