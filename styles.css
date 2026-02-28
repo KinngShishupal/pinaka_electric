@@ -776,6 +776,7 @@ section {
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
+    z-index:2;
 }
 
 .model-badge.premium {
