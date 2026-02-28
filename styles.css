@@ -144,6 +144,12 @@ body {
     width: 100%;
 }
 
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 .cta-button {
     background: var(--gradient);
     color: var(--dark);
@@ -154,11 +160,23 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 20px rgba(0, 242, 254, 0.3);
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(0, 242, 254, 0.5);
+}
+
+.dealer-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+}
+
+.dealer-btn:hover {
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
 }
 
 .hamburger {
@@ -1400,6 +1418,28 @@ section {
     box-shadow: 0 15px 40px rgba(0, 242, 254, 0.6);
 }
 
+/* Dealer Section */
+.dealer {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    padding: 6rem 0;
+}
+
+.dealer .section-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dealer .contact-feature {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.dealer .check-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
 /* Location Section */
 .location {
     background: var(--darker);
@@ -1735,7 +1775,7 @@ section {
         display: flex;
     }
 
-    .cta-button {
+    .nav-buttons {
         display: none;
     }
 

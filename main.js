@@ -302,10 +302,98 @@ async function loadVehicles() {
     }
 }
 
+// Function to handle dealer form submission
+async function handleDealerSubmit(event) {
+    event.preventDefault();
+    
+    const submitBtn = document.getElementById('dealerSubmitBtn');
+    const submitBtnText = document.getElementById('dealerSubmitBtnText');
+    const formMessage = document.getElementById('dealerFormMessage');
+    
+    // Get form data
+    const formData = {
+        name: document.getElementById('dealerName').value,
+        email: document.getElementById('dealerEmail').value,
+        phone: document.getElementById('dealerPhone').value,
+        city: document.getElementById('dealerCity').value,
+        state: document.getElementById('dealerState').value,
+        investment_capacity: document.getElementById('dealerInvestment').value,
+        message: document.getElementById('dealerMessage').value
+    };
+    
+    console.log('Submitting dealer inquiry:', formData);
+    
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtnText.textContent = 'Sending...';
+    formMessage.textContent = '';
+    formMessage.style.color = '';
+    
+    if (!supabaseClient) {
+        formMessage.textContent = '❌ Unable to submit. Please try again later.';
+        formMessage.style.color = '#f44336';
+        submitBtn.disabled = false;
+        submitBtnText.textContent = 'Submit Application';
+        return;
+    }
+    
+    try {
+        // Insert into Supabase
+        const { data, error } = await supabaseClient
+            .from('dealer_inquiries')
+            .insert([formData])
+            .select();
+        
+        if (error) {
+            console.error('Error submitting dealer form:', error);
+            formMessage.textContent = '❌ Something went wrong. Please try again.';
+            formMessage.style.color = '#f44336';
+        } else {
+            console.log('Dealer inquiry submitted successfully:', data);
+            formMessage.textContent = '✅ Application submitted! We\'ll contact you soon.';
+            formMessage.style.color = '#4caf50';
+            
+            // Reset form
+            document.getElementById('dealerForm').reset();
+            
+            // Optional: Show success for 5 seconds then fade
+            setTimeout(() => {
+                formMessage.style.opacity = '0';
+                setTimeout(() => {
+                    formMessage.textContent = '';
+                    formMessage.style.opacity = '1';
+                }, 500);
+            }, 5000);
+        }
+    } catch (err) {
+        console.error('Unexpected error:', err);
+        formMessage.textContent = '❌ An error occurred. Please try again.';
+        formMessage.style.color = '#f44336';
+    }
+    
+    // Re-enable submit button
+    submitBtn.disabled = false;
+    submitBtnText.textContent = 'Submit Application';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
     loadOfficeInfo();
     loadVehicles();
+    
+    // Attach pre-order form submit handler
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handlePreOrderSubmit);
+        console.log('✅ Pre-order form handler attached');
+    }
+    
+    // Attach dealer form submit handler
+    const dealerForm = document.getElementById('dealerForm');
+    if (dealerForm) {
+        dealerForm.addEventListener('submit', handleDealerSubmit);
+        console.log('✅ Dealer form handler attached');
+    }
     
     // Smooth scroll for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
