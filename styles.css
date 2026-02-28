@@ -894,9 +894,26 @@ section {
     cursor: pointer;
     display: flex;
     align-items: center;
+    text-decoration: none;
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
+    position:absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 85%;
+    z-index: 10;
+}
+
+.model-btn-link {
+    text-decoration: none;
+    color: var(--light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .model-btn:hover {
