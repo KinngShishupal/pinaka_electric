@@ -328,6 +328,10 @@ body {
     border: none;
     border-radius: 50px;
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     font-size: 1rem;
     cursor: pointer;
     overflow: hidden;
