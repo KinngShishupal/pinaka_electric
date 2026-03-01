@@ -678,4 +678,12 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Smooth scroll navigation enabled for all anchor links');
 });
 
-
+// Keyboard shortcut: Ctrl+Shift+O to open admin dashboard
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'o') {
+        e.preventDefault();
+        console.log('🔑 Opening admin dashboard (Ctrl+Shift+O)');
+        window.open('https://amazing-gumption-2cbb45.netlify.app/', '_blank');
+    }
+});
+console.log('✅ Admin dashboard shortcut enabled (Ctrl+Shift+O)');
