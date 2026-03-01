@@ -329,7 +329,7 @@ async function handlePreOrderSubmit(event) {
     const templateParams = {
         to_email: 'pinakaelectric2908@gmail.com',
         from_name: document.getElementById('customerName').value,
-        from_email: document.getElementById('customerEmail').value,
+        from_email: document.getElementById('customerEmail').value || 'Not provided',
         phone: document.getElementById('customerPhone').value,
         message: document.getElementById('customerMessage').value || 'No message provided',
         form_type: 'Pre-Order',
@@ -401,7 +401,7 @@ async function handleDealerSubmit(event) {
     const templateParams = {
         to_email: 'pinakaelectric2908@gmail.com',
         from_name: document.getElementById('dealerName').value,
-        from_email: document.getElementById('dealerEmail').value,
+        from_email: document.getElementById('dealerEmail').value || 'Not provided',
         phone: document.getElementById('dealerPhone').value,
         city: document.getElementById('dealerCity').value,
         state: document.getElementById('dealerState').value,
