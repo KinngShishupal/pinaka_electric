@@ -7,6 +7,20 @@ if (typeof window.supabase !== 'undefined') {
     supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
+// EmailJS configuration
+const EMAILJS_PUBLIC_KEY = '-eDJS7xun-Vj7LkJ3';
+const EMAILJS_SERVICE_ID = 'service_d6cdezm';
+const EMAILJS_PREORDER_TEMPLATE_ID = 'YOUR_PREORDER_TEMPLATE_ID';
+const EMAILJS_DEALER_TEMPLATE_ID = 'template_zf8ed2k';
+
+// Initialize EmailJS
+if (typeof emailjs !== 'undefined') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    console.log('✅ EmailJS initialized with service:', EMAILJS_SERVICE_ID);
+} else {
+    console.error('❌ EmailJS library not loaded');
+}
+
 function createStarRating(rating) {
     let stars = '';
     for (let i = 1; i <= 5; i++) {
@@ -303,34 +317,111 @@ async function loadVehicles() {
 }
 
 // Function to handle dealer form submission
+// Function to handle pre-order form submission using EmailJS only
+async function handlePreOrderSubmit(event) {
+    event.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const submitBtnText = document.getElementById('submitBtnText');
+    const formMessage = document.getElementById('formMessage');
+    const form = document.getElementById('contactForm');
+    
+    const templateParams = {
+        to_email: 'pinakaelectric2908@gmail.com',
+        from_name: document.getElementById('customerName').value,
+        from_email: document.getElementById('customerEmail').value,
+        phone: document.getElementById('customerPhone').value,
+        model: document.getElementById('selectedModel').value,
+        message: document.getElementById('customerMessage').value || 'No message provided',
+        form_type: 'Pre-Order',
+        date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+    };
+    
+    console.log('📤 Sending pre-order via EmailJS:', templateParams.from_name, '-', templateParams.model);
+    
+    submitBtn.disabled = true;
+    submitBtnText.textContent = 'Sending...';
+    formMessage.textContent = '';
+    
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('❌ EmailJS library not loaded');
+        formMessage.textContent = '❌ Email service not available. Please call us: +91 7042182908';
+        formMessage.style.color = '#f44336';
+        submitBtn.disabled = false;
+        submitBtnText.textContent = 'Pre-Order Now';
+        return;
+    }
+    
+    try {
+        const response = await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_PREORDER_TEMPLATE_ID,
+            templateParams
+        );
+        
+        console.log('✅ Email sent successfully! Status:', response.status);
+        formMessage.textContent = '✅ Thank you! We\'ll contact you soon.';
+        formMessage.style.color = '#4caf50';
+        
+        form.reset();
+        
+        setTimeout(() => {
+            formMessage.style.transition = 'opacity 0.5s';
+            formMessage.style.opacity = '0';
+            setTimeout(() => {
+                formMessage.textContent = '';
+                formMessage.style.opacity = '1';
+            }, 500);
+        }, 5000);
+        
+    } catch (error) {
+        console.error('❌ EmailJS error:', error);
+        
+        if (error.text) {
+            console.error('Error details:', error.text);
+        }
+        
+        formMessage.textContent = '❌ Unable to send. Please try again or call us: +91 7042182908';
+        formMessage.style.color = '#f44336';
+    }
+    
+    submitBtn.disabled = false;
+    submitBtnText.textContent = 'Pre-Order Now';
+}
+
+// Function to handle dealer form submission using EmailJS only
 async function handleDealerSubmit(event) {
     event.preventDefault();
     
     const submitBtn = document.getElementById('dealerSubmitBtn');
     const submitBtnText = document.getElementById('dealerSubmitBtnText');
     const formMessage = document.getElementById('dealerFormMessage');
+    const form = document.getElementById('dealerForm');
     
-    // Get form data
-    const formData = {
-        name: document.getElementById('dealerName').value,
-        email: document.getElementById('dealerEmail').value,
+    const templateParams = {
+        to_email: 'pinakaelectric2908@gmail.com',
+        from_name: document.getElementById('dealerName').value,
+        from_email: document.getElementById('dealerEmail').value,
         phone: document.getElementById('dealerPhone').value,
         city: document.getElementById('dealerCity').value,
         state: document.getElementById('dealerState').value,
-        investment_capacity: document.getElementById('dealerInvestment').value,
-        message: document.getElementById('dealerMessage').value
+        investment: document.getElementById('dealerInvestment').value,
+        message: document.getElementById('dealerMessage').value,
+        form_type: 'Dealer Inquiry',
+        date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    console.log('Submitting dealer inquiry:', formData);
+    console.log('📤 Sending dealer inquiry via EmailJS:', templateParams.from_name, '-', templateParams.city);
     
-    // Disable submit button
     submitBtn.disabled = true;
     submitBtnText.textContent = 'Sending...';
     formMessage.textContent = '';
-    formMessage.style.color = '';
     
-    if (!supabaseClient) {
-        formMessage.textContent = '❌ Unable to submit. Please try again later.';
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('❌ EmailJS library not loaded');
+        formMessage.textContent = '❌ Email service not available. Please call us: +91 7042182908';
         formMessage.style.color = '#f44336';
         submitBtn.disabled = false;
         submitBtnText.textContent = 'Submit Application';
@@ -338,40 +429,38 @@ async function handleDealerSubmit(event) {
     }
     
     try {
-        // Insert into Supabase
-        const { data, error } = await supabaseClient
-            .from('dealer_inquiries')
-            .insert([formData])
-            .select();
+        const response = await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_DEALER_TEMPLATE_ID,
+            templateParams
+        );
         
-        if (error) {
-            console.error('Error submitting dealer form:', error);
-            formMessage.textContent = '❌ Something went wrong. Please try again.';
-            formMessage.style.color = '#f44336';
-        } else {
-            console.log('Dealer inquiry submitted successfully:', data);
-            formMessage.textContent = '✅ Application submitted! We\'ll contact you soon.';
-            formMessage.style.color = '#4caf50';
-            
-            // Reset form
-            document.getElementById('dealerForm').reset();
-            
-            // Optional: Show success for 5 seconds then fade
+        console.log('✅ Email sent successfully! Status:', response.status);
+        formMessage.textContent = '✅ Application submitted! We\'ll contact you soon.';
+        formMessage.style.color = '#4caf50';
+        
+        form.reset();
+        
+        setTimeout(() => {
+            formMessage.style.transition = 'opacity 0.5s';
+            formMessage.style.opacity = '0';
             setTimeout(() => {
-                formMessage.style.opacity = '0';
-                setTimeout(() => {
-                    formMessage.textContent = '';
-                    formMessage.style.opacity = '1';
-                }, 500);
-            }, 5000);
+                formMessage.textContent = '';
+                formMessage.style.opacity = '1';
+            }, 500);
+        }, 5000);
+        
+    } catch (error) {
+        console.error('❌ EmailJS error:', error);
+        
+        if (error.text) {
+            console.error('Error details:', error.text);
         }
-    } catch (err) {
-        console.error('Unexpected error:', err);
-        formMessage.textContent = '❌ An error occurred. Please try again.';
+        
+        formMessage.textContent = '❌ Unable to send. Please try again or call us: +91 7042182908';
         formMessage.style.color = '#f44336';
     }
     
-    // Re-enable submit button
     submitBtn.disabled = false;
     submitBtnText.textContent = 'Submit Application';
 }
@@ -414,3 +503,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     console.log('✅ Smooth scroll navigation enabled for all anchor links');
 });
+
+
