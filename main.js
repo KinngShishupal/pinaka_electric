@@ -539,11 +539,92 @@ function animateCounter(element) {
     }, 16);
 }
 
+// Function to load social media links from Supabase
+async function loadSocialMedia() {
+    if (!supabaseClient) {
+        console.error('Supabase client not initialized for social media');
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('socialMedia')
+            .select('*')
+            .limit(1);
+        
+        console.log('Social media links loaded from Supabase:', data);
+        
+        if (error) {
+            console.error('Error fetching social media:', error);
+            return;
+        }
+        
+        if (!data || data.length === 0) {
+            console.warn('⚠️ socialMedia table is empty. Using default links.');
+            return;
+        }
+        
+        const social = data[0];
+        console.log('c33',social)
+        
+        // Update Facebook link
+        const facebookLink = document.getElementById('facebookLink');
+        if (facebookLink && social.facebook) {
+            facebookLink.href = social.facebook;
+            facebookLink.style.display = 'inline-flex';
+        } else if (facebookLink && !social.facebook) {
+            facebookLink.style.display = 'none';
+        }
+        
+        // Update LinkedIn link
+        const linkedinLink = document.getElementById('linkedinLink');
+        if (linkedinLink && social.linkedin) {
+            linkedinLink.href = social.linkedin;
+            linkedinLink.style.display = 'inline-flex';
+        } else if (linkedinLink && !social.linkedin) {
+            linkedinLink.style.display = 'none';
+        }
+        
+        // Update Twitter link
+        const twitterLink = document.getElementById('twitterLink');
+        if (twitterLink && social.twitter) {
+            twitterLink.href = social.twitter;
+            twitterLink.style.display = 'inline-flex';
+        } else if (twitterLink && !social.twitter) {
+            twitterLink.style.display = 'none';
+        }
+        
+        // Update Instagram link
+        const instagramLink = document.getElementById('instagramLink');
+        if (instagramLink && social.instagram) {
+            instagramLink.href = social.instagram;
+            instagramLink.style.display = 'inline-flex';
+        } else if (instagramLink && !social.instagram) {
+            instagramLink.style.display = 'none';
+        }
+        
+        // Update YouTube link
+        const youtubeLink = document.getElementById('youtubeLink');
+        if (youtubeLink && social.youtube) {
+            youtubeLink.href = social.youtube;
+            youtubeLink.style.display = 'inline-flex';
+        } else if (youtubeLink && !social.youtube) {
+            youtubeLink.style.display = 'none';
+        }
+        
+        console.log('✅ Social media links updated successfully');
+        
+    } catch (err) {
+        console.error('Unexpected error loading social media:', err);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
     loadOfficeInfo();
     loadVehicles();
     loadHeroStats();
+    loadSocialMedia();
     
     // Attach pre-order form submit handler
     const contactForm = document.getElementById('contactForm');
