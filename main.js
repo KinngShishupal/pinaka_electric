@@ -336,7 +336,7 @@ async function handlePreOrderSubmit(event) {
         date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    console.log('📤 Sending pre-order via EmailJS:', templateParams.from_name, '-', templateParams.model);
+    console.log('📤 Sending pre-order via EmailJS:', templateParams.from_name);
     
     submitBtn.disabled = true;
     submitBtnText.textContent = 'Sending...';
@@ -405,13 +405,12 @@ async function handleDealerSubmit(event) {
         phone: document.getElementById('dealerPhone').value,
         city: document.getElementById('dealerCity').value,
         state: document.getElementById('dealerState').value,
-        investment: document.getElementById('dealerInvestment').value,
         message: document.getElementById('dealerMessage').value,
         form_type: 'Dealer Inquiry',
         date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    console.log('📤 Sending dealer inquiry via EmailJS:', templateParams.from_name, '-', templateParams.city);
+    console.log('📤 Sending dealer inquiry via EmailJS:', templateParams.from_name, 'from', templateParams.city);
     
     submitBtn.disabled = true;
     submitBtnText.textContent = 'Sending...';
