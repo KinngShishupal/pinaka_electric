@@ -612,7 +612,18 @@ async function loadSocialMedia() {
             youtubeLink.style.display = 'none';
         }
         
-        console.log('✅ Social media links updated successfully');
+        console.log('✅ All social media links processed');
+        
+        // Debug: Show final href values
+        setTimeout(() => {
+            console.log('Final social media hrefs:', {
+                facebook: document.getElementById('facebookLink')?.href,
+                linkedin: document.getElementById('linkedinLink')?.href,
+                twitter: document.getElementById('twitterLink')?.href,
+                instagram: document.getElementById('instagramLink')?.href,
+                youtube: document.getElementById('youtubeLink')?.href
+            });
+        }, 100);
         
     } catch (err) {
         console.error('Unexpected error loading social media:', err);
@@ -640,11 +651,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('✅ Dealer form handler attached');
     }
     
-    // Smooth scroll for all anchor links
+    // Smooth scroll for internal anchor links (exclude external and social media links)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href && href !== '#') {
+            
+            // Skip if it's just "#" or if it's an external link that will be updated
+            if (!href || href === '#' || this.hasAttribute('target')) {
+                return; // Let the default behavior happen
+            }
+            
+            // Handle internal navigation
+            if (href.startsWith('#') && href.length > 1) {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
