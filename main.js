@@ -10,7 +10,7 @@ if (typeof window.supabase !== 'undefined') {
 // EmailJS configuration
 const EMAILJS_PUBLIC_KEY = '-eDJS7xun-Vj7LkJ3';
 const EMAILJS_SERVICE_ID = 'service_d6cdezm';
-const EMAILJS_PREORDER_TEMPLATE_ID = 'YOUR_PREORDER_TEMPLATE_ID';
+const EMAILJS_PREORDER_TEMPLATE_ID = 'template_65g69ud';
 const EMAILJS_DEALER_TEMPLATE_ID = 'template_zf8ed2k';
 
 // Initialize EmailJS
@@ -331,7 +331,6 @@ async function handlePreOrderSubmit(event) {
         from_name: document.getElementById('customerName').value,
         from_email: document.getElementById('customerEmail').value,
         phone: document.getElementById('customerPhone').value,
-        model: document.getElementById('selectedModel').value,
         message: document.getElementById('customerMessage').value || 'No message provided',
         form_type: 'Pre-Order',
         date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })

@@ -633,29 +633,30 @@
                 <div class="contact-form-wrapper">
                     <form class="contact-form" id="contactForm">
                         <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" name="name" id="customerName" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="email" name="email" id="customerEmail" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" placeholder="Phone Number" required>
+                            <input type="tel" name="phone" id="customerPhone" placeholder="Phone Number" required>
                         </div>
                         <div class="form-group">
-                            <select required>
+                            <select name="model" id="selectedModel" required>
                                 <option value="">Select Model</option>
-                                <option value="lite">Lite Glide - $399</option>
-                                <option value="urban">Urban Cruiser - $599</option>
-                                <option value="pro">Pro Rider - $899</option>
+                                <option value="TurBoX">TurBoX</option>
+                                <option value="P-BMW">P-BMW</option>
+                                <option value="Blaze-Fusion">Blaze-Fusion</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Message (Optional)" rows="4"></textarea>
+                            <textarea name="message" id="customerMessage" placeholder="Message (Optional)" rows="4"></textarea>
                         </div>
-                        <button type="submit" class="submit-btn">
-                            <span>Pre-Order Now</span>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span id="submitBtnText">Pre-Order Now</span>
                             <div class="btn-shine"></div>
                         </button>
+                        <div id="formMessage" style="margin-top: 15px; text-align: center; font-weight: bold;"></div>
                     </form>
                 </div>
             </div>
