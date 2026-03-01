@@ -463,10 +463,87 @@ async function handleDealerSubmit(event) {
     submitBtnText.textContent = 'Submit Application';
 }
 
+// Function to load hero stats from Supabase
+async function loadHeroStats() {
+    if (!supabaseClient) {
+        console.error('Supabase client not initialized for hero stats');
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabaseClient
+            .from('specs')
+            .select('*')
+            .limit(1);
+        
+        console.log('Hero stats loaded from Supabase:', data);
+        
+        if (error) {
+            console.error('Error fetching hero stats:', error);
+            return;
+        }
+        
+        if (!data || data.length === 0) {
+            console.warn('⚠️ specs table is empty. Using default values.');
+            return;
+        }
+        
+        const stats = data[0];
+        
+        // Update range
+        const rangeElement = document.getElementById('statRange');
+        if (rangeElement && stats.range) {
+            rangeElement.setAttribute('data-target', stats.range);
+            rangeElement.textContent = '0';
+            animateCounter(rangeElement);
+        }
+        
+        // Update speed
+        const speedElement = document.getElementById('statSpeed');
+        if (speedElement && stats.speed) {
+            speedElement.setAttribute('data-target', stats.speed);
+            speedElement.textContent = '0';
+            animateCounter(speedElement);
+        }
+        
+        // Update charge time
+        const chargeElement = document.getElementById('statCharge');
+        if (chargeElement && stats.charge) {
+            chargeElement.setAttribute('data-target', stats.charge);
+            chargeElement.textContent = '0';
+            animateCounter(chargeElement);
+        }
+        
+        console.log('✅ Hero stats updated successfully');
+        
+    } catch (err) {
+        console.error('Unexpected error loading hero stats:', err);
+    }
+}
+
+// Function to animate counter
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 16);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
     loadOfficeInfo();
     loadVehicles();
+    loadHeroStats();
     
     // Attach pre-order form submit handler
     const contactForm = document.getElementById('contactForm');
