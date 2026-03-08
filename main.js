@@ -228,13 +228,8 @@ function createVehicleCard(vehicle) {
                             <span class="spec-value-small">${vehicle.max_speed || 'N/A'}</span>
                         </div>
                     </div>
-                    <div class="spec-detail-item">
-                        <span class="spec-icon-small">📏</span>
-                        <div class="spec-text">
-                            <span class="spec-label-small">Net Weight</span>
-                            <span class="spec-value-small">${vehicle.net_weight || 'N/A'}</span>
-                        </div>
-                    </div>
+                    
+                   
                     <div class="spec-detail-item">
                         <span class="spec-icon-small">💪</span>
                         <div class="spec-text">
