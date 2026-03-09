@@ -632,6 +632,46 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHeroStats();
     loadSocialMedia();
     
+    // Hamburger menu functionality
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const navbar = document.getElementById('navbar');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+            console.log('🍔 Hamburger menu toggled');
+        });
+        
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                console.log('📱 Mobile menu closed after navigation');
+            });
+        });
+        
+        console.log('✅ Hamburger menu functionality initialized');
+    }
+    
+    // Navbar scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
     // Attach pre-order form submit handler
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
